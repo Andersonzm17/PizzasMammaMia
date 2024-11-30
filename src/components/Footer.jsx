@@ -5,7 +5,7 @@ const Footer = () => {
     <footer style={footerStyle}>
       <div style={containerStyle}>
         <p style={textStyle}>
-          © 2021 - Pizzeria Mamma Mia! - Todos los derechos reservados.
+          © 2024 - Pizzeria Mamma Mia! - Todos los derechos reservados.
         </p>
       </div>
     </footer>

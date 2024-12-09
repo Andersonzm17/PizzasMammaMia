@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { pizzaCart } from "../pizzas";
+import { pizzaCart } from "../data/pizzas";
 import { Button, Col, Container, Row } from "react-bootstrap";
+
 const Cart = () => {
   const [pizzaCount, setPizzaCount] = useState(pizzaCart);
   const [totalCart, setTotalCart] = useState(19190);
+  
   function decrementCount(indice) {
     pizzaCount[indice].count--;
     const updatedCart = pizzaCount.filter((pizza) => pizza.count > 0);
@@ -58,6 +60,7 @@ const Cart = () => {
             );
           })}
         </Row>
+        
         <div>
           <Button className="btn btn-warning mx-1">
             🛒 Total: ${totalCart.toLocaleString()}
@@ -69,6 +72,7 @@ const Cart = () => {
     </div>
   );
 };
+
 export default Cart;
   
   

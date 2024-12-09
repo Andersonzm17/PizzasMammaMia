@@ -1,13 +1,13 @@
 import Navbar from './components/navbar';
-import Footer from './components/Footer';
 import Header from './components/header';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Footer from './components/Footer';
+import Home from './components/home'; 
 import { Row, Col, CardText } from 'react-bootstrap';
 import CardPizza from './components/CardPizza';
 import Register from './components/Register';
 import Login from './components/Login';
 import Cart from './components/Cart';
-
+import Pizza from './components/Pizza'
 
 const App = () => {
   return (
@@ -29,9 +29,10 @@ const App = () => {
           <CardPizza nombre="Peperoni" descripcion="Esta pizza tiene peperoni" img="https://firebasestorage.googleapis.com/v0/b/apis-varias-mias.appspot.com/o/pizzeria%2Fpizza-1239077_640_com.jpg?alt=media&token=e7cde87a-08d5-4040-ac54-90f6c31eb3e3"
           precio={6950}></CardPizza>
         </Col>
-      </Row>*/}
+      </Row>
      <Cart></Cart>
-     
+     <Home></Home>*/}
+     <Pizza></Pizza>
       <Footer></Footer>
 
     </div>

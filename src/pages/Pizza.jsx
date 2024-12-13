@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 const Pizza = () => {
   const [pizza, setPizza] = useState({ ingredients: [] });
   useEffect(() => {
-    fetch("http://localhost:5000/api/pizzas/p001")
+    fetch("http://localhost:5000/api/pizzas/p002")
       .then((res) => res.json())
       .then((data) => {
         setPizza(data);

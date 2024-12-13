@@ -1,6 +1,6 @@
 import React, { useEffect, useState}from "react";
-import Header from "/Desafio Latam/pizzeria/src/components/header";
-import CardPizza from "./CardPizza";
+import Header from "../components/header";
+import CardPizza from "../components/CardPizza";
 import { pizzas } from "../data/pizzas";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Col, Container, Row } from "react-bootstrap";

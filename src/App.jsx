@@ -1,39 +1,30 @@
 import Navbar from './components/navbar';
-import Header from './components/header';
 import Footer from './components/Footer';
-import Home from './components/home'; 
-import { Row, Col, CardText } from 'react-bootstrap';
-import CardPizza from './components/CardPizza';
-import Register from './components/Register';
-import Login from './components/Login';
-import Cart from './components/Cart';
-import Pizza from './components/Pizza'
+import Home from './pages/Home'; 
+import Register from './pages/Register';
+import Login from './pages/Login';
+import Cart from './pages/Cart';
+import Pizza from './pages/Pizza';
+import { Routes, Route } from "react-router-dom";
+import Profile from "./pages/Profile";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   return (
-    <div>
+    <div className="flex flex-xol min-h-screen">
       <Navbar></Navbar>
-      <Header></Header>
-      {/*<Register></Register>*/}
-      {/*<Login></Login>*/}
-      {/*<Row>
-        <Col>
-          <CardPizza nombre="4 quesos" descripcion="Esta pizza tiene 4 quesos" img="https://firebasestorage.googleapis.com/v0/b/apis-varias-mias.appspot.com/o/pizzeria%2Fpizza-1239077_640_cl.jpg?alt=media&token=6a9a33da-5c00-49d4-9080-784dcc87ec2c"
-          precio={5950}></CardPizza>
-        </Col>
-        <Col>
-          <CardPizza nombre="Napolitana" descripcion=" Esta pizza tiene salsa napolitana" img="https://firebasestorage.googleapis.com/v0/b/apis-varias-mias.appspot.com/o/pizzeria%2Fcheese-164872_640_com.jpg?alt=media&token=18b2b821-4d0d-43f2-a1c6-8c57bc388fab"
-          precio={6950}></CardPizza>
-        </Col>
-        <Col>
-          <CardPizza nombre="Peperoni" descripcion="Esta pizza tiene peperoni" img="https://firebasestorage.googleapis.com/v0/b/apis-varias-mias.appspot.com/o/pizzeria%2Fpizza-1239077_640_com.jpg?alt=media&token=e7cde87a-08d5-4040-ac54-90f6c31eb3e3"
-          precio={6950}></CardPizza>
-        </Col>
-      </Row>
-     <Cart></Cart>
-     <Home></Home>*/}
-     <Pizza></Pizza>
-      <Footer></Footer>
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home></Home>}/>
+          <Route path="/cart" element={<Cart></Cart>}/>
+          <Route path="/login" element={<Login></Login>}/>
+          <Route path="/register" element={<Register></Register>}/>
+          <Route path="/pizza/p001" element={<Pizza></Pizza>}/>
+          <Route path="/profile" element={<Profile></Profile>}/>
+          <Route path="/*" element={<NotFound></NotFound>}/>
+     </Routes>
+     </main>
+     <Footer/>
 
     </div>
   );

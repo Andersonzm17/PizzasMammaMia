@@ -7,6 +7,7 @@ import { FaPizzaSlice } from "react-icons/fa";
 import { IoIosLogIn } from "react-icons/io";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { IoIosLogOut } from "react-icons/io";
+import { Link } from "react-router-dom"; 
 
 function Navbar () {
   const total = 25000;
@@ -16,46 +17,52 @@ function Navbar () {
       <div>
         {token ? (
           <div className="d-flex align-items-center">
-            <p className="m-1">Pizzería Mamma Mia!</p>
-            <Button variant="outline-light" className="btn-sm m-1 bg-dark">
+          <Link to="/" className="m-1 text-decoration-none text-light">
+            Pizzería Mamma Mia!
+          </Link>
+            <Link to="/" variant="outline-light" className="btn-sm m-1 bg-dark">
               <FaPizzaSlice />
-              Home
-            </Button>
-            <Button variant="outline-light" className="btn-sm m-1 bg-dark">
+               Home
+            </Link>
+            <Link to="/login" variant="outline-light" className="btn-sm m-1 bg-dark">
               <IoIosLogIn />
               Login
-            </Button>
-            <Button variant="outline-light" className="btn-sm m-1 bg-dark">
+            </Link>
+            <Link to="/register" variant="outline-light" className="btn-sm m-1 bg-dark">
               <SiGnuprivacyguard />
               Register
-            </Button>
+            </Link>
           </div>
         ) : (
           <div className="m-1 d-flex">
             <p className="m-3">Pizzería Mamma Mia!</p>
-            <Button variant="outline-light" className=" btn-sm m-1 bg-dark">
+            <Link to="/" className=" btn-sm m-1 bg-dark">
               <FaPizzaSlice />
               Home
-            </Button>
-            <Button variant="outline-light" className="btn-sm m-1 bg-dark">
+            </Link>
+            <button variant="outline-light" className="btn-sm m-1 bg-dark">
               <CgProfile />
               Profile
-            </Button>
-            <Button variant="outline-light" className="btn-sm m-1 bg-dark">
+            </button>
+            <button variant="outline-light" className="btn-sm m-1 bg-dark">
               <IoIosLogOut />
               Logout
-            </Button>
+            </button>
           </div>
         )}
       </div>
       <div className="d-flex m-1">
-        <Button variant="outline-info" className="btn-sm bg-dark">
+        <Link to="/cart" className="btn-sm bg-dark">
           <IoCartOutline />
           Total: ${format(total)}
-        </Button>
+        </Link>
+        <Link to="/profile" className="btn btn-sm m-1 text-decoration-none bg-dark text-light border-light">
+        Profile
+        
+        </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Navbar

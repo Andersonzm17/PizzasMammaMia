@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { format } from "../format";
 import { IoCartOutline } from "react-icons/io5";
@@ -8,9 +8,10 @@ import { IoIosLogIn } from "react-icons/io";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { IoIosLogOut } from "react-icons/io";
 import { Link } from "react-router-dom"; 
+import { CartContext } from "../context/CartContext";
 
 function Navbar () {
-  const total = 25000;
+  const {totalCart} = useContext(CartContext);
   const token = true;
   return (
     <div className="d-flex justify-content-between bg-dark text-light">
@@ -40,21 +41,21 @@ function Navbar () {
               <FaPizzaSlice />
               Home
             </Link>
-            <button variant="outline-light" className="btn-sm m-1 bg-dark">
+            <Button variant="outline-light" className="btn-sm m-1 bg-dark">
               <CgProfile />
               Profile
-            </button>
-            <button variant="outline-light" className="btn-sm m-1 bg-dark">
+            </Button>
+            <Button variant="outline-light" className="btn-sm m-1 bg-dark">
               <IoIosLogOut />
               Logout
-            </button>
+            </Button>
           </div>
         )}
       </div>
       <div className="d-flex m-1">
         <Link to="/cart" className="btn-sm bg-dark">
           <IoCartOutline />
-          Total: ${format(total)}
+          Total: ${format(totalCart)}
         </Link>
         <Link to="/profile" className="btn btn-sm m-1 text-decoration-none bg-dark text-light border-light">
         Profile

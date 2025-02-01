@@ -8,10 +8,14 @@ import Pizza from './pages/Pizza';
 import { Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import CartProvider from './context/CartContext';
+
 
 const App = () => {
   return (
+    
     <div className="flex flex-xol min-h-screen">
+      <CartProvider>
       <Navbar></Navbar>
       <main className="flex-grow">
         <Routes>
@@ -25,8 +29,9 @@ const App = () => {
      </Routes>
      </main>
      <Footer/>
-
-    </div>
+     </CartProvider>
+     </div>
+    
   );
 };
 

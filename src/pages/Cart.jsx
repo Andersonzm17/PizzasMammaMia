@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { pizzaCart } from "../data/pizzas";
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { CartContext } from "../context/CartContext";
+
 
 const Cart = () => {
-  const [pizzaCount, setPizzaCount] = useState(pizzaCart);
-  const [totalCart, setTotalCart] = useState(19190);
+  const {pizzaCount, setPizzaCount} = useContext(CartContext);
+  const {totalCart, setTotalCart} = useContext(CartContext);
   
-  function decrementCount(indice) {
-    pizzaCount[indice].count--;
-    const updatedCart = pizzaCount.filter((pizza) => pizza.count > 0);
-    setPizzaCount([...updatedCart]);
-    calculateTotal(pizzaCount);
+  function decrementCount(index) {
+   if (pizzaCount[index].count > 1) {
+      const updatedCart = [...pizzaCount];
+      updatedCart[index].count--;
+      setPizzaCount(updatedCart);
+      calculateTotal(updatedCart);
+    } else {
+      const updatedCart = pizzaCount.filter((_, i) => i !== index);
+      setPizzaCount(updatedCart);
+      calculateTotal(updatedCart);
+    }
   }
   function incrementCount(indice) {
     pizzaCount[indice].count++;

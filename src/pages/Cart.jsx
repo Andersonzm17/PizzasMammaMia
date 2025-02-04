@@ -7,10 +7,12 @@ import { UserContext } from "../context/UserContext";
 
 
 const Cart = () => {
-  const {pizzaCount, setPizzaCount} = useContext(CartContext);
+  const {pizzaCount, setPizzas, setPizzaCount} = useContext(CartContext);
   const {totalCart, setTotalCart} = useContext(CartContext);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const { token } = useContext(UserContext);
 
- 
   function decrementCount(index) {
    if (pizzaCount[index].count > 1) {
       const updatedCart = [...pizzaCount];
@@ -34,10 +36,53 @@ const Cart = () => {
       0
     );
     setTotalCart(total);
-  }
+  };
+  const handleCheckout = async () => {
+    if (!token) {
+      setSuccessMessage("");
+      setErrorMessage("Debe iniciar sesión para realizar una compra.");
+      return;
+    }
+    if (pizzaCount == 0) {
+      setSuccessMessage("");
+      setErrorMessage("El carrito esta vacio.");
+      return;
+    }
+    try {
+      const response = await fetch("http://localhost:5000/api/checkouts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          cart: pizzaCount,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Error al cargar el perfil.");
+      }
+      const data = await response.json();
+      setSuccessMessage("¡Compra realizada con éxito!");
+      setErrorMessage("");
+      setPizzas([]);
+      setPizzaCount([]);
+      setTotalCart(0);
+    } catch (err) {
+      console.error("Error:", err.message);
+      setErrorMessage("Hubo un problema al procesar la compra.");
+      setSuccessMessage("");
+    }
+  };
   return (
     <div className="pt-5 pb-5">
       <h2 className="text-center">Detalles del pedido:</h2>
+      {successMessage && (
+        <p className="text-success text-center">{successMessage}</p>
+      )}
+      {errorMessage && (
+        <p className="text-danger text-center">{errorMessage}</p>
+      )}
       <Container>
         <Row className="pt-2">
           {pizzaCount.map((item, index) => {
@@ -73,12 +118,17 @@ const Cart = () => {
         </Row>
         
         <div>
-          <Button className="btn btn-warning mx-1">
+          <Button disabled={!token}
+            variant="dark"
+            onClick={handleCheckout}
+            className={
+              token ? "bg-primary" : "text-secondary cursor-not-allowed"
+            }>
             🛒 Total: ${totalCart.toLocaleString()}
           </Button>
         </div>
         <br />
-        <Button variant="dark">Pagar</Button>
+        <Button variant="dark" onClick={() => handleCheckout()}>Pagar</Button>
       </Container>
     </div>
   );

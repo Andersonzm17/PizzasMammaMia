@@ -56,14 +56,17 @@ function Navbar () {
               <FaPizzaSlice />
               Home
             </Link>
-            <Button variant="outline-light" className="btn-sm m-1 bg-dark">
+            <Link to="/profile" className="btn-sm m-1 bg-dark">
               <CgProfile />
               Profile
-            </Button>
-            <Button variant="outline-light" className="btn-sm m-1 bg-dark">
+            </Link>
+            <Link to="/logout" className="btn-sm m-1 bg-dark">
               <IoIosLogOut />
               Logout
-            </Button>
+            </Link>
+            <Link to="/register"className="btn-sm m-1 bg-dark" >
+              Register
+            </Link>
           </div>
         )}
       </div>

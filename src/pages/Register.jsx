@@ -1,26 +1,22 @@
-import { useState } from "react";
+import React, {useContext} from "react";
+import { UserContext } from "../context/UserContext";
 
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    error,
+    register,
+    success,
+    confirmPassword,
+    setConfirmPassword,
+  } = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email || !password || !confirmPassword) {
-      setMessage("Todos los campos son obligatorios.");
-      return;
-    }
-    if (password.length < 6) {
-      setMessage("La contraseña debe tener al menos 6 caracteres.");
-      return;
-    }
-    if (password !== confirmPassword) {
-      setMessage("Las contraseñas no coinciden.");
-      return;
-    }
-    setMessage("¡Registro exitoso!");
+    register(email, password);
   };
 
   return (
@@ -61,7 +57,6 @@ const Register = () => {
           Registrar
         </button>
       </form>
-      {message && <p style={{ marginTop: "15px", color: message.includes("¡Registro exitoso!") ? "green" : "red" }}>{message}</p>}
     </div>
   );
 };

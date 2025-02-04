@@ -1,67 +1,47 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../context/UserContext";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Validaciones básicas
-    if (!email || !password) {
-      setMessage("Todos los campos son obligatorios.");
-      return;
-    }
-
-    if (email === "usuario@example.com" && password === "123456") {
-      setMessage("¡Inicio de sesión exitoso!");
-    } else {
-      setMessage("Credenciales incorrectas. Inténtalo de nuevo.");
-    }
-  };
-
+  const { email, setEmail } = useContext(UserContext);
+  const { password, setPassword, handleLogin } = useContext(UserContext);
+  const { error } = useContext(UserContext);
+  
   return (
-    <div style={{ maxWidth: "400px", margin: "auto", padding: "20px", border: "1px solid #ccc", borderRadius: "10px" }}>
-      <h2>Inicio de Sesión</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: "15px" }}>
-          <label htmlFor="email">Email:</label>
+    <div className="d-flex pt-5  flex-column align-items-center ">
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
+        {error && <p className="text-danger">{error}</p>}
+        <div
+          className="p-2
+        "
+        >
+          <label>Email:</label>
+          <br />
           <input
             type="email"
-            id="email"
+            name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: "100%", padding: "10px", marginTop: "5px" }}
           />
         </div>
-        <div style={{ marginBottom: "15px" }}>
-          <label htmlFor="password">Contraseña:</label>
+        <div className="p-2">
+          <label>Contraseña:</label>
+          <br />
           <input
             type="password"
-            id="password"
+            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ width: "100%", padding: "10px", marginTop: "5px" }}
           />
         </div>
-        <button
-          type="submit"
-          style={{
-            width: "100%",
-            padding: "10px",
-            backgroundColor: "red",
-            color: "black",
-            border: "none",
-            borderRadius: "5px",
-          }}
-        >
-          Iniciar Sesión
-        </button>
+
+        <div className="d-flex justify-content-center">
+          <button type="submit">Iniciar Sesión</button>
+        </div>
       </form>
-      {message && <p style={{ marginTop: "15px", color: message.includes("exitoso") ? "green" : "red" }}>{message}</p>}
     </div>
   );
 };
 
 export default Login;
+

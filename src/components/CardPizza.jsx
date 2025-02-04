@@ -2,31 +2,11 @@ import React from "react";
 import { Button, Card } from "react-bootstrap";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
-const CardPizza = ({ pizza }) => {
-const {pizzaCount, setPizzaCount, totalCart, setTotalCart, pizzas} = useContext (CartContext);
-function incrementCount(id) {
-  const existingPizza = pizzaCount.find((item) => item.id === id);
-  if (existingPizza) {
-    const updatedCart = pizzaCount.map((item) =>
-      item.id === id ? { ...item, count: item.count + 1 } : item
-    );
-    setPizzaCount(updatedCart);
-    calculateTotal(updatedCart);
-  } else {
-    const pizzaToAdd = pizzas.find((pizza) => pizza.id === id);
-    const newCart = [...pizzaCount, { ...pizzaToAdd, count: 1 }];
-    setPizzaCount(newCart);
-    calculateTotal(newCart);
-  }
-}
-function calculateTotal(updatedCart) {
-  const total = updatedCart.reduce(
-    (sum, pizza) => sum + pizza.price * pizza.count,
-    0
-  );
-  setTotalCart(total);
-}
+const CardPizza = ({ pizza, }) => {
+const {incrementCount} = useContext (CartContext);
+
 
   return (
     <div className="card mx-2 my-3" style={{ width: "18rem" }}>
@@ -43,7 +23,10 @@ function calculateTotal(updatedCart) {
         <p>
           <strong>Precio:</strong> ${pizza.price.toLocaleString()}
         </p>
-          <Button variant="light">Ver mas</Button>
+        <Link to={`/pizza/${pizza.id}`} className="btn bg-light text-dark">
+              Ver Más
+          
+            </Link>
           <Button variant="dark" onClick={() => incrementCount (pizza.id)}>Añadir</Button>
         </div>
       </div>

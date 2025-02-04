@@ -9,10 +9,11 @@ import { SiGnuprivacyguard } from "react-icons/si";
 import { IoIosLogOut } from "react-icons/io";
 import { Link } from "react-router-dom"; 
 import { CartContext } from "../context/CartContext";
+import { UserContext } from "../context/UserContext";
 
 function Navbar () {
   const {totalCart} = useContext(CartContext);
-  const token = true;
+  const {token, logout } = useContext(UserContext) ;
   return (
     <div className="d-flex justify-content-between bg-dark text-light">
       <div>
@@ -25,6 +26,12 @@ function Navbar () {
               <FaPizzaSlice />
                Home
             </Link>
+            <Link
+              to="/profile"
+              className="btn btn-sm m-1 bg-dark text-decoration-none text-light border-light">
+                <CgProfile />
+              Profile
+            </Link>
             <Link to="/login" variant="outline-light" className="btn-sm m-1 bg-dark">
               <IoIosLogIn />
               Login
@@ -32,6 +39,14 @@ function Navbar () {
             <Link to="/register" variant="outline-light" className="btn-sm m-1 bg-dark">
               <SiGnuprivacyguard />
               Register
+            </Link>
+            <Link
+              variant="outline-light"
+              className="btn btn-sm m-1 bg-dark text-decoration-none text-light border-light"
+              onClick={logout}
+            >
+              <IoIosLogOut />
+              Logout
             </Link>
           </div>
         ) : (

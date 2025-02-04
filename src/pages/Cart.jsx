@@ -2,12 +2,15 @@ import React, { useContext, useState } from "react";
 import { pizzaCart } from "../data/pizzas";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
+import { UserContext } from "../context/UserContext";
+
 
 
 const Cart = () => {
   const {pizzaCount, setPizzaCount} = useContext(CartContext);
   const {totalCart, setTotalCart} = useContext(CartContext);
-  
+
+ 
   function decrementCount(index) {
    if (pizzaCount[index].count > 1) {
       const updatedCart = [...pizzaCount];
